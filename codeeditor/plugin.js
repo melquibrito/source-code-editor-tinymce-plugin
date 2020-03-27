@@ -37,6 +37,18 @@ function applyTheme(ref) {
 
 ! function() {
     "use strict";
+
+    let themesPack = function() {
+        let customPack = tinymce.activeEditor.getParam('codeeditor_themes_pack');
+        if (typeof customPack === "string") {
+            return customPack.trim().replace(/(\s+)/g, "?").split("?");
+        }
+        if (Array.isArray(customPack)) {
+            return customPack
+        }
+        return ['twilight', 'merbivore', 'dawn', 'kuroir']
+    }();
+
     let styleInnerHTML = `
 #tox-codeeditor-wrap {
     position: fixed;
