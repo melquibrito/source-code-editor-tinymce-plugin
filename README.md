@@ -49,7 +49,7 @@ Check out _ACE_ available themes [here](https://github.com/ajaxorg/ace/tree/mast
       });
 ```
 
-  3. __codeeditor_font_size__ -> Integer representing height in pixels. Default is __12__.
+  3. __codeeditor_font_size__ -> Number representing height in pixels. Default is __12__.
     
 ```javascript
       tinymce.init({
@@ -58,5 +58,14 @@ Check out _ACE_ available themes [here](https://github.com/ajaxorg/ace/tree/mast
           codeeditor_font_size: 12
       });
 ```
+
+```javascript
+      tinymce.init({
+          toolbar: ["codeeditor"],
+          plugins: ["codeeditor"],
+          codeeditor_font_size: "12"
+      });
+```
+
 
 I am stil working on this plugin, if you have any suggestion, let me know. Many other configuration options will be available soon.
