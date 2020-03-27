@@ -49,6 +49,14 @@ function applyTheme(ref) {
         return ['twilight', 'merbivore', 'dawn', 'kuroir']
     }();
 
+    const getOptions = function() {
+        let options = '';
+        for(let theme of themesPack) {
+            options = options + `<option value="ace/theme/${theme}">${theme[0].toUpperCase() + theme.slice(1)}</option>`
+        }
+        return options
+    }
+
     let styleInnerHTML = `
 #tox-codeeditor-wrap {
     position: fixed;
@@ -60,6 +68,7 @@ function applyTheme(ref) {
     bottom: 0;
     right: 0;
     z-index: 10000;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }  
 #tox-codeeditor-modal {
     position: relative;
@@ -204,15 +213,30 @@ function applyTheme(ref) {
     position: absolute;
     right: 0;
     top: 0;
+    backdrop-filter: blur(3px);
 }
 #tox-codeeditor-theme-label {
     position: relative;
     font-size: 14px;
     float: left;
     margin-right: 5px;
+    font-weight: normal;
+    line-height: 20px;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    color: #626262;
+    font-family: "Segoe UI", Arial, sans-serif;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
 }
 .tox-codeeditor__disable-scroll {
     overflow: hidden;
+}
+#tox-codeeditor-modal, #tox-codeeditor-header, #tox-codeeditor-editor-container, #tox-codeeditor-footer {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
     `;
     let aceStyle = document.createElement('style');
@@ -228,7 +252,7 @@ function applyTheme(ref) {
 <div class="tox-codeeditor-wrap__backdrop"></div>
 <div id="tox-codeeditor-modal" tabindex="-1">
     <div id="tox-codeeditor-header" role="presentation">
-        <div id="tox-codeeditor-modal-title">Código Fonte</div>
+        <div id="tox-codeeditor-modal-title">Source Code</div>
         <button type="button" onclick="displayToxEditorModal(false)" tabindex="-1" id="tox-codeeditor-close-button">
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M17.953 7.453L13.422 12l4.531 4.547-1.406 1.406L12 13.422l-4.547 4.531-1.406-1.406L10.578 12 6.047 7.453l1.406-1.406L12 10.578l4.547-4.531z" fill-rule="evenodd"></path></svg>
         </button>
@@ -237,17 +261,14 @@ function applyTheme(ref) {
         <div id="tox-codeeditor-editor"></div>
     </div>
     <div id="tox-codeeditor-footer">
-        <label for="tox-codeeditor-theme-picker" id="tox-codeeditor-theme-label">Tema: </label>
+        <label for="tox-codeeditor-theme-picker" id="tox-codeeditor-theme-label">Theme: </label>
         <select id="tox-codeeditor-theme-picker" onchange="applyTheme(this)">
-            <option value="ace/theme/twilight" selected>Twilight</option>
-            <option value="ace/theme/merbivore">Merbivore</option>
-            <option value="ace/theme/dawn">Dawn</option>
-            <option value="ace/theme/kuroir">Kuroir</option>
+            ${getOptions()}
         </select>
         <div role="presentation" id="tox-codeeditor-footer-buttons">
             
-            <button title="Cancelar" type="button" tabindex="-1" onclick="displayToxEditorModal(false)" class="tox-codeeditor-secondary-button">Cancelar</button>
-            <button title="Salvar" type="button" tabindex="-1" onclick="saveContent()" class="tox-codeeditor-primary-button">Salvar</button>
+            <button title="Cancelar" type="button" tabindex="-1" onclick="displayToxEditorModal(false)" class="tox-codeeditor-secondary-button">Cancel</button>
+            <button title="Salvar" type="button" tabindex="-1" onclick="saveContent()" class="tox-codeeditor-primary-button">Save</button>
         </div>
     </div>
 </div>
