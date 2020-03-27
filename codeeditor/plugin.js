@@ -49,6 +49,22 @@ function applyTheme(ref) {
         return ['twilight', 'merbivore', 'dawn', 'kuroir']
     }();
 
+    let fontSize = function() {
+        let customFontSize = tinymce.activeEditor.getParam('codeeditor_font_size');
+        if(typeof customFontSize === "number") {
+            return parseInt(customFontSize);
+        }
+        return 12
+    }();
+
+    let wrapMode = function() {
+        let wrapContent = tinymce.activeEditor.getParam('codeeditor_wrap_mode');
+        if(typeof wrapContent === "boolean") {
+            return wrapContent
+        }
+        return true
+    }();
+
     const getOptions = function() {
         let options = '';
         for(let theme of themesPack) {
@@ -300,7 +316,7 @@ function applyTheme(ref) {
         try {
             aceEditor = ace.edit("tox-codeeditor-editor");
             aceEditor.setTheme("ace/theme/twilight");
-            aceEditor.setFontSize(12);
+            aceEditor.setFontSize(fontSize);
             clearInterval(tryToBuildAceTimer);
         } catch (e) {}
     }, 500);
@@ -313,7 +329,7 @@ function applyTheme(ref) {
                 displayToxEditorModal();
                 let content = html_beautify(e.dom.decode(e.getContent({ source_view: !0 })));
                 let session = ace.createEditSession(content, "ace/mode/html");
-                session.setUseWrapMode(true);
+                session.setUseWrapMode(wrapMode);
                 aceEditor.setSession(session);
             }
         })
