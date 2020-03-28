@@ -68,7 +68,7 @@ function applyTheme(ref) {
     const getOptions = function() {
         let options = '';
         for(let theme of themesPack) {
-            options = options + `<option value="ace/theme/${theme}">${theme[0].toUpperCase() + theme.slice(1)}</option>`
+            options = options + `<option value="ace/theme/${theme.toLowerCase()}">${theme[0].toUpperCase() + theme.slice(1)}</option>`
         }
         return options
     }
