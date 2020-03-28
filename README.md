@@ -59,4 +59,4 @@ Check out _ACE_ available themes [here](https://github.com/ajaxorg/ace/tree/mast
       });
 ```
 
-I am stil working on this plugin, if you have any suggestion, let me know. Many other configuration options will be available soon.
+I am still working on this plugin... So, if you have any suggestion, let me know. Many other configuration options will be available soon.
