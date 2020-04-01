@@ -332,6 +332,14 @@ function applyTheme(ref) {
                 session.setUseWrapMode(wrapMode);
                 aceEditor.setSession(session);
             }
-        })
+        });
+        return {
+            getMetadata: function () {
+                return {
+                    name: "CodeEditor",
+                    url: "https://github.com/melquibrito/Source-code-editor-tinymce-plugin"
+                };
+            }
+        }
     });
 }();
