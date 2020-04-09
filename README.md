@@ -1,4 +1,4 @@
-# Source Coude Editor plugin
+# Source Code Editor plugin
 Advanced Source Code plugin for _Tinymce WYSIWYG Editor_ built alongside _ACE_
 
 ![preview](/Preview.png)
