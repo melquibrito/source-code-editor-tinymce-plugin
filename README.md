@@ -60,4 +60,4 @@ Check out _ACE_ available themes [here](https://github.com/ajaxorg/ace/tree/mast
 ```
 
 # License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for more details.
