@@ -5,38 +5,37 @@
  * @description Tinymce custom advanced plugin for source code editing.
  */
 
-var aceEditor, tryToBuildAceTimer;
-
-function displayToxEditorModal(display = true) {
-    let el = document.getElementById('tox-codeeditor-wrap');
-    if (display) {
-        el.style.display = "flex";
-        el.focus();
-        document.body.classList.add('tox-codeeditor__disable-scroll');
-    } else {
-        el.style.display = "none";
-        document.body.classList.remove('tox-codeeditor__disable-scroll');
-        tinymce.activeEditor.focus();
-    }
-}
-
-function saveContent() {
-    let e = tinymce.activeEditor;
-    e.focus();
-    e.undoManager.transact(function() {
-        e.setContent(aceEditor.getValue())
-    });
-    e.selection.setCursorLocation();
-    e.nodeChanged();
-    displayToxEditorModal(false);
-}
-
-function applyTheme(ref) {
-    aceEditor.setTheme(ref.options[ref.selectedIndex].value);
-}
-
-! function() {
+(function() {
     "use strict";
+    
+    var aceEditor, tryToBuildAceTimer;
+    function displayToxEditorModal(display = true) {
+        let el = document.getElementById('tox-codeeditor-wrap');
+        if (display) {
+            el.style.display = "flex";
+            el.focus();
+            document.body.classList.add('tox-codeeditor__disable-scroll');
+        } else {
+            el.style.display = "none";
+            document.body.classList.remove('tox-codeeditor__disable-scroll');
+            tinymce.activeEditor.focus();
+        }
+    }
+
+    function saveContent() {
+        let e = tinymce.activeEditor;
+        e.focus();
+        e.undoManager.transact(function() {
+            e.setContent(aceEditor.getValue())
+        });
+        e.selection.setCursorLocation();
+        e.nodeChanged();
+        displayToxEditorModal(false);
+    }
+
+    function applyTheme(ref) {
+        aceEditor.setTheme(ref.options[ref.selectedIndex].value);
+    }
 
     let themesPack = function() {
         let customPack = tinymce.activeEditor.getParam('codeeditor_themes_pack');
@@ -342,4 +341,4 @@ function applyTheme(ref) {
             }
         }
     });
-}();
+})();
