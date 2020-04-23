@@ -5,37 +5,38 @@
  * @description Tinymce custom advanced plugin for source code editing.
  */
 
-(function() {
+var aceEditor, tryToBuildAceTimer;
+
+function displayToxEditorModal(display = true) {
+    let el = document.getElementById('tox-codeeditor-wrap');
+    if (display) {
+        el.style.display = "flex";
+        el.focus();
+        document.body.classList.add('tox-codeeditor__disable-scroll');
+    } else {
+        el.style.display = "none";
+        document.body.classList.remove('tox-codeeditor__disable-scroll');
+        tinymce.activeEditor.focus();
+    }
+}
+
+function saveContent() {
+    let e = tinymce.activeEditor;
+    e.focus();
+    e.undoManager.transact(function() {
+        e.setContent(aceEditor.getValue())
+    });
+    e.selection.setCursorLocation();
+    e.nodeChanged();
+    displayToxEditorModal(false);
+}
+
+function applyTheme(ref) {
+    aceEditor.setTheme(ref.options[ref.selectedIndex].value);
+}
+
+! function() {
     "use strict";
-    
-    var aceEditor, tryToBuildAceTimer;
-    function displayToxEditorModal(display = true) {
-        let el = document.getElementById('tox-codeeditor-wrap');
-        if (display) {
-            el.style.display = "flex";
-            el.focus();
-            document.body.classList.add('tox-codeeditor__disable-scroll');
-        } else {
-            el.style.display = "none";
-            document.body.classList.remove('tox-codeeditor__disable-scroll');
-            tinymce.activeEditor.focus();
-        }
-    }
-
-    function saveContent() {
-        let e = tinymce.activeEditor;
-        e.focus();
-        e.undoManager.transact(function() {
-            e.setContent(aceEditor.getValue())
-        });
-        e.selection.setCursorLocation();
-        e.nodeChanged();
-        displayToxEditorModal(false);
-    }
-
-    function applyTheme(ref) {
-        aceEditor.setTheme(ref.options[ref.selectedIndex].value);
-    }
 
     let themesPack = function() {
         let customPack = tinymce.activeEditor.getParam('codeeditor_themes_pack');
@@ -67,7 +68,7 @@
     const getOptions = function() {
         let options = '';
         for(let theme of themesPack) {
-            options = options + `<option value="ace/theme/${theme.toLowerCase()}">${theme[0].toUpperCase() + theme.slice(1)}</option>`
+            options = options + `<option value="ace/theme/${theme}">${theme[0].toUpperCase() + theme.slice(1)}</option>`
         }
         return options
     }
@@ -267,7 +268,7 @@
 <div class="tox-codeeditor-wrap__backdrop"></div>
 <div id="tox-codeeditor-modal" tabindex="-1">
     <div id="tox-codeeditor-header" role="presentation">
-        <div id="tox-codeeditor-modal-title">Source Code</div>
+        <div id="tox-codeeditor-modal-title">Código Fonte</div>
         <button type="button" onclick="displayToxEditorModal(false)" tabindex="-1" id="tox-codeeditor-close-button">
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M17.953 7.453L13.422 12l4.531 4.547-1.406 1.406L12 13.422l-4.547 4.531-1.406-1.406L10.578 12 6.047 7.453l1.406-1.406L12 10.578l4.547-4.531z" fill-rule="evenodd"></path></svg>
         </button>
@@ -276,14 +277,14 @@
         <div id="tox-codeeditor-editor"></div>
     </div>
     <div id="tox-codeeditor-footer">
-        <label for="tox-codeeditor-theme-picker" id="tox-codeeditor-theme-label">Theme: </label>
+        <label for="tox-codeeditor-theme-picker" id="tox-codeeditor-theme-label">Tema: </label>
         <select id="tox-codeeditor-theme-picker" onchange="applyTheme(this)">
             ${getOptions()}
         </select>
         <div role="presentation" id="tox-codeeditor-footer-buttons">
             
-            <button title="Cancelar" type="button" tabindex="-1" onclick="displayToxEditorModal(false)" class="tox-codeeditor-secondary-button">Cancel</button>
-            <button title="Salvar" type="button" tabindex="-1" onclick="saveContent()" class="tox-codeeditor-primary-button">Save</button>
+            <button title="Cancelar" type="button" tabindex="-1" onclick="displayToxEditorModal(false)" class="tox-codeeditor-secondary-button">Cancelar</button>
+            <button title="Salvar" type="button" tabindex="-1" onclick="saveContent()" class="tox-codeeditor-primary-button">Salvar</button>
         </div>
     </div>
 </div>
@@ -323,7 +324,7 @@
     tinymce.PluginManager.add('codeeditor', function(e) {
         e.ui.registry.addButton('codeeditor', {
             icon: 'sourcecode',
-            tooltip: 'Source Code',
+            tooltip: 'Código Fonte',
             onAction: function() {
                 displayToxEditorModal();
                 let content = html_beautify(e.dom.decode(e.getContent({ source_view: !0 })));
@@ -341,4 +342,4 @@
             }
         }
     });
-})();
+}();
