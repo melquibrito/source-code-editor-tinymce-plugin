@@ -1,5 +1,5 @@
-# Source Code Editor plugin
-Advanced Source Code plugin for _Tinymce WYSIWYG Editor_ built alongside _ACE_
+# Source Code Editor
+Advanced Source Code Editor plugin for [Tinymce WYSIWYG Editor](https://www.tiny.cloud/) built alongside [ACE](https://ace.c9.io/#nav=about&api=editor)
 
 ![preview](/Preview.png)
 
@@ -13,6 +13,7 @@ Download any of tinymce self-hosted releases [here](https://www.tiny.cloud/get-t
 In order to have it in your editor, after including _codeeditor_ folder in your tinymce plugins directory, you must tell tinymce to inlcude the plugin as well as its toolbar button as demonstrated bellow...
 ```javascript
 tinymce.init({
+    selector: "#target-element", // change this value according to your HTML target element selector
     toolbar: ["codeeditor"],
     plugins: ["codeeditor"],
 });
@@ -23,6 +24,7 @@ The following configuration options are provided:
 
 ```javascript
     tinymce.init({
+        selector: "#target-element", // change this value according to your HTML target element selector
         toolbar: ["codeeditor"],
         plugins: ["codeeditor"],
         codeeditor_themes_pack: "twilight merbivore dawn kuroir"
@@ -31,6 +33,7 @@ The following configuration options are provided:
 
 ```javascript
     tinymce.init({
+        selector: "#target-element", // change this value according to your HTML target element selector
         toolbar: ["codeeditor"],
         plugins: ["codeeditor"],
         codeeditor_themes_pack: ["twilight", "merbivore", "dawn", "kuroir"]
@@ -43,6 +46,7 @@ Check out _ACE_ available themes [here](https://github.com/ajaxorg/ace/tree/mast
     
 ```javascript
       tinymce.init({
+          selector: "#target-element", // change this value according to your HTML target element selector
           toolbar: ["codeeditor"],
           plugins: ["codeeditor"],
           codeeditor_wrap_mode: true
@@ -53,11 +57,14 @@ Check out _ACE_ available themes [here](https://github.com/ajaxorg/ace/tree/mast
     
 ```javascript
       tinymce.init({
+          selector: "#target-element", // change this value according to your HTML target element selector
           toolbar: ["codeeditor"],
           plugins: ["codeeditor"],
           codeeditor_font_size: 12
       });
 ```
-
+## Author
+* [Melqui Brito](https://github.com/melquibrito)
+    
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for more details.
