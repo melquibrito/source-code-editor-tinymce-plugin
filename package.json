@@ -1,0 +1,30 @@
+{
+  "name": "source-code-editor-tinymce-plugin",
+  "version": "1.0.0",
+  "description": "Advanced Source Code Editor plugin for Tinymce WYSIWYG Editor built alongside ACE",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melquibrito/source-code-editor-tinymce-plugin.git"
+  },
+  "keywords": [
+    "tinymce",
+    "ace",
+    "ace-editor",
+    "wysiwyg-editor",
+    "wysiwyg",
+    "source-code-extension",
+	"tinymce-plugin",
+    "codeeditor",
+    "ace-theme"
+  ],
+  "author": "melquibrito",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melquibrito/source-code-editor-tinymce-plugin/issues"
+  },
+  "homepage": "https://github.com/melquibrito/source-code-editor-tinymce-plugin#readme"
+}
